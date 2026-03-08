@@ -80,13 +80,110 @@ header { position:relative; z-index:10; padding:20px 28px; display:flex; align-i
 .first-msg-panel { display:none; }
 .first-msg-panel.active { display:block; }
 footer { position:relative; z-index:10; text-align:center; padding:30px; border-top:1px solid var(--border); color:#333; font-size:0.72rem; }
+
+  /* OVERLAY */
+  .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .overlay.hidden { display:none; }
+  .modal { background:#111; border:1px solid var(--border); border-radius:24px; padding:48px 44px; max-width:440px; width:100%; text-align:center; box-shadow:0 60px 100px rgba(0,0,0,0.8); animation:modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+  .modal-icon { font-size:2.4rem; margin-bottom:20px; }
+  .modal h2 { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:var(--cream); margin-bottom:10px; line-height:1.2; }
+  .modal h2 em { font-style:italic; color:var(--gold); }
+  .modal p { color:#6b6b6b; font-size:0.88rem; line-height:1.6; margin-bottom:28px; }
+  .modal-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.95rem; padding:14px 18px; outline:none; transition:border-color 0.2s; margin-bottom:14px; text-align:center; }
+  .modal-input::placeholder { color:#3a3a3a; }
+  .modal-input:focus { border-color:rgba(201,168,76,0.4); }
+  .modal-btn { width:100%; background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; border:none; padding:15px; border-radius:12px; cursor:pointer; transition:all 0.2s; }
+  .modal-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+  .modal-btn.secondary { background:transparent; border:1px solid var(--border); color:#6b6b6b; margin-top:10px; }
+  .modal-btn.secondary:hover { border-color:rgba(201,168,76,0.3); color:var(--cream); transform:none; }
+  .modal-note { margin-top:18px; font-size:0.72rem; color:#3a3a3a; line-height:1.5; }
+  .modal-error { background:rgba(255,60,60,0.08); border:1px solid rgba(255,60,60,0.2); color:#ff8080; padding:10px 14px; border-radius:8px; font-size:0.8rem; margin-bottom:12px; display:none; }
+  .price-badge { display:inline-flex; align-items:baseline; gap:4px; margin-bottom:20px; }
+  .price-amount { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--gold); }
+  .price-period { font-size:0.82rem; color:#5a5a5a; }
+  .paywall-features { text-align:left; margin:20px 0 24px; }
+  .paywall-feature { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; font-size:0.85rem; color:#8a8a8a; }
+  .paywall-feature::before { content:'✦'; color:var(--gold); font-size:0.65rem; margin-top:3px; flex-shrink:0; }
+  /* TRIAL BAR */
+  .trial-bar { position:relative; z-index:10; max-width:780px; margin:0 auto; padding:14px 20px; display:none; }
+  .trial-inner { background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.2); border-radius:12px; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .trial-left { display:flex; align-items:center; gap:10px; font-size:0.82rem; color:#8a8a8a; }
+  .trial-dots { display:flex; gap:5px; }
+  .trial-dot { width:9px; height:9px; border-radius:50%; background:rgba(201,168,76,0.2); border:1px solid rgba(201,168,76,0.3); transition:all 0.3s; }
+  .trial-dot.used { background:var(--gold); border-color:var(--gold); }
+  .trial-upgrade { background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--gold); font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:6px 14px; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+  /* USER BAR */
+  .user-info-bar { position:relative; z-index:10; max-width:780px; margin:0 auto; padding:0 20px; display:none; }
+  .user-info-inner { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:0.75rem; color:#444; }
+  .logout-btn { background:none; border:none; color:#444; font-size:0.72rem; cursor:pointer; font-family:'DM Sans',sans-serif; transition:color 0.2s; }
+  .logout-btn:hover { color:var(--cream); }
 </style>
 </head>
 <body>
 
+
+<!-- AUTH OVERLAY -->
+<div class="overlay" id="auth-overlay">
+  <div class="modal">
+    <div class="modal-icon">🔐</div>
+    <h2>Accède à<br><em>BCOME3LITE RIZZ</em></h2>
+    <p>Entre ton email pour commencer.<br>3 essais gratuits, aucune carte requise.</p>
+    <div class="modal-error" id="auth-error"></div>
+    <input type="email" class="modal-input" id="auth-email" placeholder="ton@email.com" />
+    <button class="modal-btn" onclick="handleAuth()">Commencer gratuitement →</button>
+    <div class="modal-note">🔒 Ton email ne sera jamais partagé · 3 réponses offertes</div>
+  </div>
+</div>
+
+<!-- PAYWALL OVERLAY -->
+<div class="overlay hidden" id="paywall-overlay">
+  <div class="modal">
+    <div class="modal-icon">⚡</div>
+    <h2>Tes 3 essais<br><em>sont épuisés</em></h2>
+    <div class="price-badge">
+      <span class="price-amount">5€</span>
+      <span class="price-period">/ mois</span>
+    </div>
+    <div class="paywall-features">
+      <div class="paywall-feature">Réponses illimitées — Robert Greene + Ty</div>
+      <div class="paywall-feature">Accès aux 2 modes : répondre et premier message</div>
+      <div class="paywall-feature">Tous les styles et archétypes disponibles</div>
+      <div class="paywall-feature">Mises à jour régulières</div>
+    </div>
+    <button class="modal-btn" onclick="handleUpgrade()">Passer à Premium — 5€/mois</button>
+    <button class="modal-btn secondary" onclick="closePaywall()">Continuer avec l'essai gratuit</button>
+    <div class="modal-note">Paiement sécurisé · Résiliation à tout moment</div>
+  </div>
+</div>
+
 <header>
   <div class="logo">BCOME3LITE <span>RIZZ</span></div>
 </header>
+
+
+<!-- USER INFO -->
+<div class="user-info-bar" id="user-info-bar">
+  <div class="user-info-inner">
+    <span id="user-email-display" style="color:#666;"></span>
+    <button class="logout-btn" onclick="handleLogout()">Se déconnecter</button>
+  </div>
+</div>
+
+<!-- TRIAL BAR -->
+<div class="trial-bar" id="trial-bar">
+  <div class="trial-inner">
+    <div class="trial-left">
+      <div class="trial-dots">
+        <div class="trial-dot" id="dot-1"></div>
+        <div class="trial-dot" id="dot-2"></div>
+        <div class="trial-dot" id="dot-3"></div>
+      </div>
+      <span id="trial-text">3 essais gratuits disponibles</span>
+    </div>
+    <button class="trial-upgrade" onclick="showPaywall()">Passer Premium ✦</button>
+  </div>
+</div>
 
 <div class="mode-switcher">
   <div class="mode-tabs">
@@ -319,6 +416,7 @@ SELON LA PLATEFORME :
 - SMS/IRL : aller droit au but, pas de warm-up.`;
 
 async function generateResponse() {
+  if (!checkAccessBeforeGenerate()) return;
   const message = document.getElementById('message-input').value.trim();
   if (!message) { showError('error-msg', 'Colle le message reçu d\'abord'); return; }
 
@@ -348,6 +446,7 @@ Génère 3 réponses distinctes. Chacune doit sonner naturelle, pas robotique. J
 }
 
 async function generateFirstMessage() {
+  if (!checkAccessBeforeGenerate()) return;
   const bio = document.getElementById('profile-bio').value.trim();
   if (!bio) { showError('first-error-msg', 'Décris son profil d\'abord'); return; }
 
@@ -389,6 +488,7 @@ async function callAPI(prompt, gridId, sectionId, errorId, btnId, textId, loadin
     if (!response.ok) throw new Error("API "+response.status+": "+(data.error?.message||JSON.stringify(data)));
     const raw = data.content.map(i=>i.text||"").join("");
     const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
+    incrementUse();
     renderResponses(parsed.responses, gridId, sectionId);
   } catch(err) {
     showError(errorId, "Erreur: "+err.message);
@@ -424,6 +524,80 @@ function setLoading(btnId,textId,loadingId,loading) {
 }
 function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
 function hideError(id){document.getElementById(id).style.display='none';}
+
+  const MAX_FREE_USES = 3;
+
+  function getUser() {
+    try { return JSON.parse(localStorage.getItem('b3_user')); } catch(e) { return null; }
+  }
+  function saveUser(data) { localStorage.setItem('b3_user', JSON.stringify(data)); }
+
+  function initApp() {
+    const user = getUser();
+    if (!user) { document.getElementById('auth-overlay').classList.remove('hidden'); return; }
+    document.getElementById('auth-overlay').classList.add('hidden');
+    showUserBar(user);
+    updateTrialBar(user);
+  }
+
+  function showUserBar(user) {
+    document.getElementById('user-info-bar').style.display = 'block';
+    document.getElementById('user-email-display').textContent = '✦ ' + user.email;
+    if (!user.premium) document.getElementById('trial-bar').style.display = 'block';
+  }
+
+  function updateTrialBar(user) {
+    if (user.premium) { document.getElementById('trial-bar').style.display = 'none'; return; }
+    const used = user.uses || 0;
+    const remaining = Math.max(0, MAX_FREE_USES - used);
+    document.getElementById('trial-text').textContent = remaining > 0
+      ? remaining + ' essai' + (remaining > 1 ? 's' : '') + ' gratuit' + (remaining > 1 ? 's' : '') + ' restant' + (remaining > 1 ? 's' : '')
+      : 'Essais épuisés — passe à Premium';
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot-' + i);
+      if (i <= used) dot.classList.add('used'); else dot.classList.remove('used');
+    }
+  }
+
+  function handleAuth() {
+    const email = document.getElementById('auth-email').value.trim();
+    const errorEl = document.getElementById('auth-error');
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      errorEl.textContent = 'Entre un email valide pour continuer.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    errorEl.style.display = 'none';
+    let user = getUser();
+    if (!user || user.email !== email) user = { email, uses: 0, premium: false };
+    saveUser(user);
+    document.getElementById('auth-overlay').classList.add('hidden');
+    showUserBar(user);
+    updateTrialBar(user);
+  }
+
+  function handleLogout() { localStorage.removeItem('b3_user'); location.reload(); }
+  function showPaywall() { document.getElementById('paywall-overlay').classList.remove('hidden'); }
+  function closePaywall() { document.getElementById('paywall-overlay').classList.add('hidden'); }
+  function handleUpgrade() { window.location.href = 'https://buy.stripe.com/bJe3cvd5K8R39xR3XE5Ne00'; }
+
+  function checkAccessBeforeGenerate() {
+    const user = getUser();
+    if (!user) { initApp(); return false; }
+    if (user.premium) return true;
+    if ((user.uses || 0) >= MAX_FREE_USES) { showPaywall(); return false; }
+    return true;
+  }
+
+  function incrementUse() {
+    const user = getUser();
+    if (user && !user.premium) { user.uses = (user.uses || 0) + 1; saveUser(user); updateTrialBar(user); }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => { initApp(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && document.activeElement.id === 'auth-email') handleAuth();
+  });
 </script>
 </body>
 </html>
