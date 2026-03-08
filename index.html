@@ -3,1042 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BCOME3LITE RIZZ — Réponds comme un pro</title>
+<title>BCOME3LITE RIZZ</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #0a0a0a;
-    --cream: #f5f0e8;
-    --gold: #c9a84c;
-    --gold-light: #e8d5a3;
-    --charcoal: #1e1e1e;
-    --muted: #6b6b6b;
-    --card: #141414;
-    --border: #2a2a2a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--black);
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* BACKGROUND TEXTURE */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(201,168,76,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* HEADER */
-  header {
-    position: relative;
-    z-index: 10;
-    padding: 28px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-  }
-
-  .logo span {
-    color: var(--gold);
-    font-style: italic;
-  }
-
-  .badge {
-    background: rgba(201,168,76,0.12);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold-light);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 20px;
-  }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 80px 40px 60px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    line-height: 1.12;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 22px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero p {
-    color: #9a9a9a;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  /* MAIN TOOL */
-  .tool-container {
-    position: relative;
-    z-index: 10;
-    max-width: 820px;
-    margin: 0 auto 80px;
-    padding: 0 24px;
-  }
-
-  .tool-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-  }
-
-  /* CONTEXT SECTION */
-  .section-header {
-    padding: 24px 32px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .step-num {
-    width: 24px;
-    height: 24px;
-    background: rgba(201,168,76,0.15);
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-
-  .section-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* CONTEXT PILLS */
-  .context-area {
-    padding: 16px 32px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .context-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-
-  .pill {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: #7a7a7a;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .pill:hover, .pill.active {
-    background: rgba(201,168,76,0.1);
-    border-color: rgba(201,168,76,0.4);
-    color: var(--gold-light);
-  }
-
-  .pill-label {
-    font-size: 0.68rem;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  /* MESSAGE INPUT */
-  .message-area {
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .message-input {
-    width: 100%;
-    min-height: 140px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    padding: 18px 20px;
-    resize: vertical;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-
-  .message-input::placeholder { color: #444; }
-
-  .message-input:focus {
-    border-color: rgba(201,168,76,0.4);
-    background: rgba(201,168,76,0.02);
-  }
-
-  .input-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 12px;
-  }
-
-  .char-count {
-    font-size: 0.72rem;
-    color: #444;
-  }
-
-  /* TONE SELECTOR */
-  .tone-area {
-    padding: 20px 32px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .tone-options {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .tone-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: #6b6b6b;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    padding: 8px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .tone-btn:hover, .tone-btn.active {
-    background: rgba(201,168,76,0.08);
-    border-color: rgba(201,168,76,0.35);
-    color: var(--cream);
-  }
-
-  /* GENERATE BUTTON */
-  .generate-area {
-    padding: 24px 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .generate-btn {
-    background: var(--gold);
-    color: var(--black);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .generate-btn:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(201,168,76,0.25);
-  }
-
-  .generate-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .generate-hint {
-    font-size: 0.75rem;
-    color: #444;
-  }
-
-  /* LOADING */
-  .loading-dots {
-    display: none;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .loading-dots span {
-    width: 5px;
-    height: 5px;
-    background: var(--black);
-    border-radius: 50%;
-    animation: bounce 1.2s infinite;
-  }
-
-  .loading-dots span:nth-child(2) { animation-delay: 0.15s; }
-  .loading-dots span:nth-child(3) { animation-delay: 0.3s; }
-
-  @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-    40% { transform: scale(1.2); opacity: 1; }
-  }
-
-  /* RESULT */
-  .result-section {
-    display: none;
-    border-top: 1px solid var(--border);
-    background: rgba(201,168,76,0.02);
-  }
-
-  .result-header {
-    padding: 24px 32px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .result-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .result-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .action-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: #6b6b6b;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .action-btn:hover {
-    border-color: rgba(201,168,76,0.3);
-    color: var(--cream);
-  }
-
-  /* RESPONSES */
-  .responses-grid {
-    padding: 20px 32px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .response-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 22px;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.25s;
-    animation: fadeSlideIn 0.4s ease forwards;
-    opacity: 0;
-  }
-
-  .response-card:nth-child(2) { animation-delay: 0.1s; }
-  .response-card:nth-child(3) { animation-delay: 0.2s; }
-
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .response-card:hover {
-    border-color: rgba(201,168,76,0.3);
-    background: rgba(201,168,76,0.04);
-  }
-
-  .response-card.selected {
-    border-color: rgba(201,168,76,0.5);
-    background: rgba(201,168,76,0.06);
-  }
-
-  .response-tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .response-tag::before {
-    content: '';
-    width: 16px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .response-text {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--cream);
-    font-weight: 300;
-  }
-
-  .response-why {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.75rem;
-    color: #5a5a5a;
-    line-height: 1.5;
-    font-style: italic;
-  }
-
-  .copy-indicator {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    font-size: 0.65rem;
-    color: var(--gold);
-    opacity: 0;
-    transition: opacity 0.2s;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .response-card:hover .copy-indicator { opacity: 0.6; }
-  .response-card.selected .copy-indicator { opacity: 1; }
-
-  /* TIPS SECTION */
-  .tips-section {
-    max-width: 820px;
-    margin: 0 auto 80px;
-    padding: 0 24px;
-    display: none;
-  }
-
-  .tips-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .tip-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px;
-    animation: fadeSlideIn 0.4s ease forwards;
-    opacity: 0;
-  }
-
-  .tip-card:nth-child(2) { animation-delay: 0.08s; }
-  .tip-card:nth-child(3) { animation-delay: 0.16s; }
-
-  .tip-icon { font-size: 1.2rem; margin-bottom: 10px; }
-  
-  .tip-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .tip-text {
-    font-size: 0.78rem;
-    color: #5a5a5a;
-    line-height: 1.6;
-  }
-
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid var(--border);
-    color: #333;
-    font-size: 0.75rem;
-  }
-
-  /* ERROR */
-  .error-msg {
-    background: rgba(255,60,60,0.08);
-    border: 1px solid rgba(255,60,60,0.2);
-    color: #ff8080;
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    margin: 0 32px 24px;
-    display: none;
-  }
-
-  @media (max-width: 640px) {
-    header { padding: 20px; }
-    .hero { padding: 50px 20px 40px; }
-    .section-header, .context-area, .message-area, .tone-area, .generate-area, .responses-grid { padding-left: 20px; padding-right: 20px; }
-    .tips-grid { grid-template-columns: 1fr; }
-    .result-header { padding: 20px 20px 0; }
-  }
-
-  /* ═══════════════════════════════════
-     AUTH & PAYWALL SYSTEM
-  ═══════════════════════════════════ */
-
-  /* OVERLAY */
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .overlay.hidden { display: none; }
-
-  .modal {
-    background: #111;
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 48px 44px;
-    max-width: 440px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 60px 100px rgba(0,0,0,0.8);
-    animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  }
-
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.9) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-icon {
-    font-size: 2.4rem;
-    margin-bottom: 20px;
-  }
-
-  .modal h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .modal h2 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .modal p {
-    color: #6b6b6b;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-bottom: 28px;
-  }
-
-  .modal-input {
-    width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    padding: 14px 18px;
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 14px;
-    text-align: center;
-  }
-
-  .modal-input::placeholder { color: #3a3a3a; }
-  .modal-input:focus { border-color: rgba(201,168,76,0.4); }
-
-  .modal-btn {
-    width: 100%;
-    background: var(--gold);
-    color: var(--black);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  .modal-btn:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(201,168,76,0.3);
-  }
-
-  .modal-btn.secondary {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: #6b6b6b;
-    margin-top: 10px;
-  }
-
-  .modal-btn.secondary:hover {
-    border-color: rgba(201,168,76,0.3);
-    color: var(--cream);
-    transform: none;
-    box-shadow: none;
-  }
-
-  .modal-note {
-    margin-top: 18px;
-    font-size: 0.72rem;
-    color: #3a3a3a;
-    line-height: 1.5;
-  }
-
-  .modal-error {
-    background: rgba(255,60,60,0.08);
-    border: 1px solid rgba(255,60,60,0.2);
-    color: #ff8080;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    margin-bottom: 12px;
-    display: none;
-  }
-
-  /* TRIAL COUNTER */
-  .trial-bar {
-    position: relative;
-    z-index: 10;
-    max-width: 820px;
-    margin: 0 auto 0;
-    padding: 14px 24px;
-    display: none;
-  }
-
-  .trial-inner {
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 12px;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .trial-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.82rem;
-    color: #8a8a8a;
-  }
-
-  .trial-dots {
-    display: flex;
-    gap: 5px;
-  }
-
-  .trial-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: rgba(201,168,76,0.2);
-    border: 1px solid rgba(201,168,76,0.3);
-    transition: all 0.3s;
-  }
-
-  .trial-dot.used {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-
-  .trial-upgrade {
-    background: transparent;
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .trial-upgrade:hover {
-    background: rgba(201,168,76,0.1);
-  }
-
-  /* PAYWALL FEATURES */
-  .paywall-features {
-    text-align: left;
-    margin: 20px 0 24px;
-  }
-
-  .paywall-feature {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 0.85rem;
-    color: #8a8a8a;
-  }
-
-  .paywall-feature::before {
-    content: '✦';
-    color: var(--gold);
-    font-size: 0.65rem;
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-
-  .price-badge {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 4px;
-    margin-bottom: 20px;
-  }
-
-  .price-amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: var(--gold);
-  }
-
-  .price-period {
-    font-size: 0.82rem;
-    color: #5a5a5a;
-  }
-
-  .user-info-bar {
-    position: relative;
-    z-index: 10;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: none;
-  }
-
-  .user-info-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.75rem;
-    color: #444;
-  }
-
-  .user-email-display {
-    color: #666;
-  }
-
-  .logout-btn {
-    background: none;
-    border: none;
-    color: #444;
-    font-size: 0.72rem;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: color 0.2s;
-  }
-
-  .logout-btn:hover { color: var(--cream); }
-
-
-  /* MODE SWITCHER */
-  .mode-switcher {
-    position: relative;
-    z-index: 10;
-    max-width: 820px;
-    margin: 0 auto 0;
-    padding: 0 24px 24px;
-    display: block;
-  }
-
-  .mode-tabs {
-    display: flex;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 6px;
-    gap: 6px;
-  }
-
-  .mode-tab {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #5a5a5a;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 12px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.25s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .mode-tab:hover { color: var(--cream); }
-
-  .mode-tab.active {
-    background: rgba(201,168,76,0.12);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold-light);
-  }
-
-  .mode-tab .tab-icon { font-size: 1rem; }
-
-  /* FIRST MSG PANEL */
-  .first-msg-panel {
-    display: none;
-  }
-
-  .first-msg-panel.active {
-    display: block;
-  }
-
-  .reply-panel {
-    display: block;
-  }
-
-  .reply-panel.hidden {
-    display: none;
-  }
-
-  /* PROFILE INPUT */
-  .profile-area {
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  .profile-input {
-    width: 100%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    padding: 12px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .profile-input::placeholder { color: #3a3a3a; }
-  .profile-input:focus { border-color: rgba(201,168,76,0.4); }
-
-  .profile-textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    padding: 12px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-    resize: vertical;
-    min-height: 80px;
-    line-height: 1.5;
-  }
-
-  .profile-textarea::placeholder { color: #3a3a3a; }
-  .profile-textarea:focus { border-color: rgba(201,168,76,0.4); }
-
-  .platform-pills {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-
-  @media (max-width: 640px) {
-    .profile-grid { grid-template-columns: 1fr; }
-    .mode-tab span.tab-label { display: none; }
-  }
+:root { --black:#0a0a0a; --cream:#f5f0e8; --gold:#c9a84c; --gold-light:#e8d5a3; --card:#141414; --border:#2a2a2a; --muted:#6b6b6b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--black); color:var(--cream); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 60% 40% at 20% 20%, rgba(201,168,76,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%); pointer-events:none; z-index:0; }
+header { position:relative; z-index:10; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); }
+.logo { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--cream); }
+.logo span { color:var(--gold); font-style:italic; }
+.mode-switcher { position:relative; z-index:10; max-width:780px; margin:0 auto; padding:16px 20px 0; }
+.mode-tabs { display:flex; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:5px; gap:5px; }
+.mode-tab { flex:1; background:transparent; border:none; color:#5a5a5a; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:500; padding:10px 12px; border-radius:8px; cursor:pointer; transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:6px; }
+.mode-tab:hover { color:var(--cream); }
+.mode-tab.active { background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.3); color:var(--gold-light); }
+.hero { position:relative; z-index:10; text-align:center; padding:36px 28px 28px; max-width:700px; margin:0 auto; }
+.hero-eyebrow { font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.hero h1 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.15; font-weight:700; color:var(--cream); margin-bottom:12px; }
+.hero h1 em { font-style:italic; color:var(--gold); }
+.hero p { color:#9a9a9a; font-size:0.88rem; font-weight:300; line-height:1.6; max-width:480px; margin:0 auto; }
+.tool-container { position:relative; z-index:10; max-width:780px; margin:0 auto 60px; padding:0 20px; }
+.tool-card { background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,0.5); }
+.section-header { padding:18px 24px 0; display:flex; align-items:center; gap:8px; }
+.step-num { width:22px; height:22px; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:700; color:var(--gold); flex-shrink:0; }
+.section-label { font-size:0.68rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+.context-area { padding:12px 24px 18px; border-bottom:1px solid var(--border); }
+.pill-label { font-size:0.65rem; color:var(--muted); margin-bottom:7px; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; }
+.context-pills { display:flex; flex-wrap:wrap; gap:6px; }
+.pill { background:transparent; border:1px solid var(--border); color:#7a7a7a; font-family:'DM Sans',sans-serif; font-size:0.75rem; padding:5px 12px; border-radius:20px; cursor:pointer; transition:all 0.2s; }
+.pill:hover,.pill.active { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.4); color:var(--gold-light); }
+.message-area { padding:18px 24px; border-bottom:1px solid var(--border); }
+.message-input { width:100%; min-height:110px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.9rem; line-height:1.6; padding:14px 16px; resize:vertical; transition:border-color 0.2s; outline:none; }
+.message-input::placeholder { color:#444; }
+.message-input:focus { border-color:rgba(201,168,76,0.4); }
+.input-footer { display:flex; align-items:center; justify-content:space-between; margin-top:8px; }
+.char-count { font-size:0.68rem; color:#444; }
+.tone-area { padding:16px 24px 18px; border-bottom:1px solid var(--border); }
+.tone-options { display:flex; gap:6px; flex-wrap:wrap; }
+.tone-btn { background:transparent; border:1px solid var(--border); color:#6b6b6b; font-family:'DM Sans',sans-serif; font-size:0.78rem; padding:7px 14px; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.tone-btn:hover,.tone-btn.active { background:rgba(201,168,76,0.08); border-color:rgba(201,168,76,0.35); color:var(--cream); }
+.generate-area { padding:18px 24px; display:flex; align-items:center; gap:14px; }
+.generate-btn { background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:700; border:none; padding:13px 26px; border-radius:10px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:7px; }
+.generate-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+.generate-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+.generate-hint { font-size:0.72rem; color:#444; }
+.loading-dots { display:none; align-items:center; gap:4px; }
+.loading-dots span { width:5px; height:5px; background:var(--black); border-radius:50%; animation:bounce 1.2s infinite; }
+.loading-dots span:nth-child(2) { animation-delay:0.15s; }
+.loading-dots span:nth-child(3) { animation-delay:0.3s; }
+@keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5}40%{transform:scale(1.2);opacity:1} }
+.error-msg { background:rgba(255,60,60,0.08); border:1px solid rgba(255,60,60,0.2); color:#ff8080; padding:12px 16px; border-radius:8px; font-size:0.82rem; margin:0 24px 16px; display:none; }
+.result-section { display:none; border-top:1px solid var(--border); background:rgba(201,168,76,0.02); }
+.result-header { padding:18px 24px 0; display:flex; align-items:center; justify-content:space-between; }
+.result-title { font-family:'Playfair Display',serif; font-size:0.95rem; font-style:italic; color:var(--gold); }
+.action-btn { background:transparent; border:1px solid var(--border); color:#6b6b6b; font-family:'DM Sans',sans-serif; font-size:0.7rem; padding:5px 10px; border-radius:6px; cursor:pointer; transition:all 0.2s; }
+.action-btn:hover { border-color:rgba(201,168,76,0.3); color:var(--cream); }
+.responses-grid { padding:16px 24px 24px; display:flex; flex-direction:column; gap:12px; }
+.response-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:12px; padding:16px 18px; position:relative; cursor:pointer; transition:all 0.25s; animation:fadeIn 0.4s ease forwards; opacity:0; }
+.response-card:nth-child(2){animation-delay:0.1s}.response-card:nth-child(3){animation-delay:0.2s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.response-card:hover { border-color:rgba(201,168,76,0.3); background:rgba(201,168,76,0.04); }
+.response-card.selected { border-color:rgba(201,168,76,0.5); background:rgba(201,168,76,0.06); }
+.response-tag { font-size:0.62rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.response-tag::before { content:''; width:14px; height:1px; background:var(--gold); }
+.response-text { font-size:0.9rem; line-height:1.65; color:var(--cream); font-weight:300; }
+.response-why { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05); font-size:0.72rem; color:#5a5a5a; line-height:1.5; font-style:italic; }
+.copy-indicator { position:absolute; top:12px; right:12px; font-size:0.62rem; color:var(--gold); opacity:0; transition:opacity 0.2s; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; }
+.response-card:hover .copy-indicator { opacity:0.6; }
+.response-card.selected .copy-indicator { opacity:1; }
+.profile-area { padding:12px 24px 18px; border-bottom:1px solid var(--border); }
+.profile-textarea { width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.85rem; padding:11px 14px; outline:none; transition:border-color 0.2s; resize:vertical; min-height:80px; line-height:1.5; }
+.profile-textarea::placeholder { color:#3a3a3a; }
+.profile-textarea:focus { border-color:rgba(201,168,76,0.4); }
+.reply-panel.hidden { display:none; }
+.first-msg-panel { display:none; }
+.first-msg-panel.active { display:block; }
+footer { position:relative; z-index:10; text-align:center; padding:30px; border-top:1px solid var(--border); color:#333; font-size:0.72rem; }
 </style>
-  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-
-
-<!-- AUTH OVERLAY — LOGIN/REGISTER -->
-<div class="overlay" id="auth-overlay">
-  <div class="modal" id="auth-modal">
-    <div class="modal-icon">🔐</div>
-    <h2>Accède à<br><em>BCOME3LITE RIZZ</em></h2>
-    <p>Entre ton email pour commencer.<br>3 essais gratuits, aucune carte requise.</p>
-    <div class="modal-error" id="auth-error"></div>
-    <input type="email" class="modal-input" id="auth-email" placeholder="ton@email.com" />
-    <button class="modal-btn" onclick="handleAuth()">Commencer gratuitement →</button>
-    <div class="modal-note">🔒 Ton email ne sera jamais partagé · 3 réponses offertes</div>
-  </div>
-</div>
-
-<!-- PAYWALL OVERLAY -->
-<div class="overlay hidden" id="paywall-overlay">
-  <div class="modal" id="paywall-modal">
-    <div class="modal-icon">⚡</div>
-    <h2>Tes 3 essais<br><em>sont épuisés</em></h2>
-    <div class="price-badge">
-      <span class="price-amount">5€</span>
-      <span class="price-period">/ mois</span>
-    </div>
-    <div class="paywall-features">
-      <div class="paywall-feature">Réponses illimitées basées sur Robert Greene</div>
-      <div class="paywall-feature">Les 24 lois de la séduction appliquées à chaque message</div>
-      <div class="paywall-feature">Analyses poussées selon le contexte et la vibe</div>
-      <div class="paywall-feature">Accès à tous les styles et archétypes de séducteurs</div>
-    </div>
-    <button class="modal-btn" onclick="handleUpgrade()">Passer à Premium — 5€/mois</button>
-    <button class="modal-btn secondary" onclick="closePaywall()">Continuer avec l'essai gratuit</button>
-    <div class="modal-note">Paiement sécurisé · Résiliation à tout moment</div>
-  </div>
-</div>
 
 <header>
   <div class="logo">BCOME3LITE <span>RIZZ</span></div>
 </header>
 
-<!-- USER INFO -->
-<div class="user-info-bar" id="user-info-bar">
-  <div class="user-info-inner">
-    <span class="user-email-display" id="user-email-display"></span>
-    <button class="logout-btn" onclick="handleLogout()">Se déconnecter</button>
-  </div>
-</div>
-
-<!-- TRIAL COUNTER -->
-<div class="trial-bar" id="trial-bar">
-  <div class="trial-inner">
-    <div class="trial-left">
-      <div class="trial-dots" id="trial-dots">
-        <div class="trial-dot" id="dot-1"></div>
-        <div class="trial-dot" id="dot-2"></div>
-        <div class="trial-dot" id="dot-3"></div>
-      </div>
-      <span id="trial-text">3 essais gratuits disponibles</span>
-    </div>
-    <button class="trial-upgrade" onclick="showPaywall()">Passer Premium ✦</button>
-  </div>
-</div>
-
-
-
-
-<!-- MODE SWITCHER -->
-<div class="mode-switcher" id="mode-switcher">
+<div class="mode-switcher">
   <div class="mode-tabs">
-    <button class="mode-tab active" id="tab-reply" onclick="switchMode('reply')">
-      <span class="tab-icon">💬</span>
-      <span class="tab-label">Répondre à un message</span>
-    </button>
-    <button class="mode-tab" id="tab-first" onclick="switchMode('first')">
-      <span class="tab-icon">🚀</span>
-      <span class="tab-label">Premier message</span>
-    </button>
+    <button class="mode-tab active" id="tab-reply" onclick="switchMode('reply')">💬 Répondre à un message</button>
+    <button class="mode-tab" id="tab-first" onclick="switchMode('first')">🚀 Premier message</button>
   </div>
 </div>
 
-<section class="hero" id="hero-section">
+<section class="hero">
   <div class="hero-eyebrow" id="hero-eyebrow">✦ L'art de la réponse parfaite</div>
   <h1 id="hero-title">Réponds aux messages<br>comme un <em>expert</em></h1>
-  <p id="hero-desc">Colle le message que tu as reçu, donne le contexte — BCOME3LITE RIZZ génère les meilleures réponses basées sur les principes de séduction qui fonctionnent vraiment.</p>
+  <p id="hero-desc">Colle le message reçu, donne le contexte. Les réponses sont basées sur Robert Greene et les meilleurs coachs.</p>
 </section>
 
 <div class="tool-container">
@@ -1046,98 +106,69 @@
 
     <!-- REPLY PANEL -->
     <div class="reply-panel" id="reply-panel">
-
-    <!-- CONTEXT -->
-    <div class="section-header">
-      <div class="step-num">1</div>
-      <div class="section-label">Le contexte</div>
-    </div>
-    <div class="context-area">
-      <div class="pill-label">Où vous en êtes ?</div>
-      <div class="context-pills" id="stage-pills">
-        <button class="pill active" data-val="premier_contact">Premier contact</button>
-        <button class="pill" data-val="quelques_echanges">Quelques échanges</button>
-        <button class="pill" data-val="on_se_connait">On se connaît</button>
-        <button class="pill" data-val="apres_rdv">Après un rdv</button>
-        <button class="pill" data-val="cold_restart">Relancer après silence</button>
-      </div>
-
-      <div class="pill-label" style="margin-top:14px;">Vibe de la conversation ?</div>
-      <div class="context-pills" id="vibe-pills">
-        <button class="pill active" data-val="legere">Légère / fun</button>
-        <button class="pill" data-val="flirty">Flirty</button>
-        <button class="pill" data-val="intello">Intello / profonde</button>
-        <button class="pill" data-val="froide">Distante / froide</button>
-        <button class="pill" data-val="inconnue">Je sais pas</button>
-      </div>
-    </div>
-
-    <!-- MESSAGE INPUT -->
-    <div class="section-header">
-      <div class="step-num">2</div>
-      <div class="section-label">Son message</div>
-    </div>
-    <div class="message-area">
-      <textarea class="message-input" id="message-input" placeholder="Colle ici exactement ce qu'elle t'a envoyé..." maxlength="800"></textarea>
-      <div class="input-footer">
-        <span class="char-count" id="char-count">0 / 800</span>
-        <span style="font-size:0.72rem;color:#444;">Plus c'est précis, meilleure est la réponse</span>
-      </div>
-    </div>
-
-    <!-- TONE -->
-    <div class="section-header">
-      <div class="step-num">3</div>
-      <div class="section-label">Ton style</div>
-    </div>
-    <div class="tone-area">
-      <div class="tone-options" id="tone-options">
-        <button class="tone-btn active" data-val="confident">😎 Confiant</button>
-        <button class="tone-btn" data-val="mystere">🎩 Mystérieux</button>
-        <button class="tone-btn" data-val="taquin">😏 Taquin</button>
-        <button class="tone-btn" data-val="direct">⚡ Direct</button>
-        <button class="tone-btn" data-val="doux">🤝 Doux</button>
-        <button class="tone-btn" data-val="humour">😂 Humour</button>
-      </div>
-    </div>
-
-    <!-- GENERATE -->
-    <div class="generate-area">
-      <button class="generate-btn" id="generate-btn" onclick="generateResponse()">
-        <span id="btn-text">Générer mes réponses</span>
-        <div class="loading-dots" id="loading">
-          <span></span><span></span><span></span>
+      <div class="section-header"><div class="step-num">1</div><div class="section-label">Le contexte</div></div>
+      <div class="context-area">
+        <div class="pill-label">Où vous en êtes ?</div>
+        <div class="context-pills" id="stage-pills">
+          <button class="pill active" data-val="premier_contact">Premier contact</button>
+          <button class="pill" data-val="quelques_echanges">Quelques échanges</button>
+          <button class="pill" data-val="on_se_connait">On se connaît</button>
+          <button class="pill" data-val="apres_rdv">Après un rdv</button>
+          <button class="pill" data-val="cold_restart">Relancer après silence</button>
         </div>
-      </button>
-      <span class="generate-hint">3 réponses adaptées à la situation</span>
-    </div>
-
-    <!-- ERROR -->
-    <div class="error-msg" id="error-msg"></div>
-
-    <!-- RESULT -->
-    <div class="result-section" id="result-section">
-      <div class="result-header">
-        <div class="result-title">Tes réponses sur-mesure</div>
-        <div class="result-actions">
-          <button class="action-btn" onclick="generateResponse()">↻ Regénérer</button>
+        <div class="pill-label" style="margin-top:12px;">Vibe de la conv ?</div>
+        <div class="context-pills" id="vibe-pills">
+          <button class="pill active" data-val="legere">Légère / fun</button>
+          <button class="pill" data-val="flirty">Flirty</button>
+          <button class="pill" data-val="intello">Intello / profonde</button>
+          <button class="pill" data-val="froide">Distante / froide</button>
+          <button class="pill" data-val="inconnue">Je sais pas</button>
         </div>
       </div>
-      <div class="responses-grid" id="responses-grid"></div>
+
+      <div class="section-header"><div class="step-num">2</div><div class="section-label">Son message</div></div>
+      <div class="message-area">
+        <textarea class="message-input" id="message-input" placeholder="Colle ici exactement ce qu'elle t'a envoyé..." maxlength="800"></textarea>
+        <div class="input-footer">
+          <span class="char-count" id="char-count">0 / 800</span>
+        </div>
+      </div>
+
+      <div class="section-header"><div class="step-num">3</div><div class="section-label">Ton style</div></div>
+      <div class="tone-area">
+        <div class="tone-options" id="tone-options">
+          <button class="tone-btn active" data-val="confident">😎 Confiant</button>
+          <button class="tone-btn" data-val="mystere">🎩 Mystérieux</button>
+          <button class="tone-btn" data-val="taquin">😏 Taquin</button>
+          <button class="tone-btn" data-val="direct">⚡ Direct</button>
+          <button class="tone-btn" data-val="doux">🤝 Doux</button>
+          <button class="tone-btn" data-val="humour">😂 Humour</button>
+        </div>
+      </div>
+
+      <div class="generate-area">
+        <button class="generate-btn" id="generate-btn" onclick="generateResponse()">
+          <span id="btn-text">Générer mes réponses</span>
+          <div class="loading-dots" id="loading"><span></span><span></span><span></span></div>
+        </button>
+        <span class="generate-hint">3 réponses adaptées</span>
+      </div>
+      <div class="error-msg" id="error-msg"></div>
+      <div class="result-section" id="result-section">
+        <div class="result-header">
+          <div class="result-title">Tes réponses</div>
+          <div><button class="action-btn" onclick="generateResponse()">↻ Regénérer</button></div>
+        </div>
+        <div class="responses-grid" id="responses-grid"></div>
+      </div>
     </div>
 
-    </div><!-- end reply-panel -->
-
-    <!-- FIRST MESSAGE PANEL -->
+    <!-- FIRST MSG PANEL -->
     <div class="first-msg-panel" id="first-msg-panel">
-
-      <div class="section-header">
-        <div class="step-num">1</div>
-        <div class="section-label">Sa plateforme</div>
-      </div>
+      <div class="section-header"><div class="step-num">1</div><div class="section-label">Sa plateforme</div></div>
       <div class="context-area">
         <div class="pill-label">Où tu veux la contacter ?</div>
-        <div class="platform-pills" id="platform-pills">
+        <div class="context-pills" id="platform-pills">
           <button class="pill active" data-val="instagram">📸 Instagram</button>
           <button class="pill" data-val="tiktok">🎵 TikTok</button>
           <button class="pill" data-val="snapchat">👻 Snapchat</button>
@@ -1147,28 +178,21 @@
         </div>
       </div>
 
-      <div class="section-header">
-        <div class="step-num">2</div>
-        <div class="section-label">Son profil</div>
-      </div>
+      <div class="section-header"><div class="step-num">2</div><div class="section-label">Son profil</div></div>
       <div class="profile-area">
-        <textarea class="profile-textarea" id="profile-bio" placeholder="Décris ce que tu sais d'elle : sa bio, ses posts récents, ses centres d'intérêt, ce qui t'a attiré chez elle... Plus tu donnes de détails, meilleur est le premier message."></textarea>
+        <textarea class="profile-textarea" id="profile-bio" placeholder="Décris ce que tu sais d'elle : sa bio, ses posts, ses intérêts, ce qui t'a attiré..."></textarea>
       </div>
 
-      <div class="section-header">
-        <div class="step-num">3</div>
-        <div class="section-label">Ton objectif</div>
-      </div>
-      <div class="context-area" style="border-bottom: 1px solid var(--border);">
-        <div class="pill-label">Ce que tu veux obtenir</div>
+      <div class="section-header"><div class="step-num">3</div><div class="section-label">Ton objectif & style</div></div>
+      <div class="context-area" style="border-bottom:1px solid var(--border);">
+        <div class="pill-label">Objectif</div>
         <div class="context-pills" id="goal-pills">
-          <button class="pill active" data-val="engager">Lancer la conversation</button>
+          <button class="pill active" data-val="engager">Lancer la conv</button>
           <button class="pill" data-val="numero">Obtenir son numéro</button>
-          <button class="pill" data-val="rdv">Proposer un rdv direct</button>
+          <button class="pill" data-val="rdv">Proposer un rdv</button>
           <button class="pill" data-val="intrigue">Juste l'intriguer</button>
         </div>
-
-        <div class="pill-label" style="margin-top:14px;">Ton style</div>
+        <div class="pill-label" style="margin-top:12px;">Style</div>
         <div class="context-pills" id="first-tone-pills">
           <button class="pill active" data-val="confident">😎 Confiant</button>
           <button class="pill" data-val="taquin">😏 Taquin</button>
@@ -1178,727 +202,228 @@
         </div>
       </div>
 
-      <!-- GENERATE FIRST MSG -->
       <div class="generate-area">
         <button class="generate-btn" id="generate-first-btn" onclick="generateFirstMessage()">
           <span id="first-btn-text">Générer mon premier message</span>
-          <div class="loading-dots" id="first-loading">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="loading-dots" id="first-loading"><span></span><span></span><span></span></div>
         </button>
         <span class="generate-hint">3 approches différentes</span>
       </div>
-
       <div class="error-msg" id="first-error-msg"></div>
-
-      <!-- FIRST MSG RESULT -->
       <div class="result-section" id="first-result-section">
         <div class="result-header">
           <div class="result-title">Tes premiers messages</div>
-          <div class="result-actions">
-            <button class="action-btn" onclick="generateFirstMessage()">↻ Regénérer</button>
-          </div>
+          <div><button class="action-btn" onclick="generateFirstMessage()">↻ Regénérer</button></div>
         </div>
         <div class="responses-grid" id="first-responses-grid"></div>
       </div>
-
     </div>
-    <!-- END FIRST MESSAGE PANEL -->
 
   </div>
 </div>
-
-<!-- TIPS -->
-<div class="tips-section" id="tips-section">
-  <div class="tips-grid">
-    <div class="tip-card">
-      <div class="tip-icon">⏱️</div>
-      <div class="tip-title">Le timing</div>
-      <div class="tip-text">Ne réponds pas instantanément. Attends entre 5 et 30 minutes. L'urgence est peu attrayante, la rareté crée de la valeur.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">❓</div>
-      <div class="tip-title">Une question max</div>
-      <div class="tip-text">Ne pose jamais deux questions d'affilée. Une seule question ouverte, bien choisie, montre que tu écoutes vraiment.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🎯</div>
-      <div class="tip-title">L'objectif</div>
-      <div class="tip-text">Chaque message doit servir un but : faire rire, créer de la tension, proposer un rdv. Sans but, la conv stagne.</div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  BCOME3LITE RIZZ · Propulsé par l'IA · Les réponses sont des suggestions — adapte-les à ta personnalité
-</footer>
 
 <script>
-  // STATE
-  let selectedStage = 'premier_contact';
-  let selectedVibe = 'legere';
-  let selectedTone = 'confident';
-
-  // PILLS
-  document.querySelectorAll('#stage-pills .pill').forEach(btn => {
+// PILLS SETUP
+['stage-pills','vibe-pills','platform-pills','goal-pills','first-tone-pills'].forEach(id => setupPills(id));
+document.querySelectorAll('#tone-options .tone-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tone-options .tone-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+function setupPills(id) {
+  document.querySelectorAll('#'+id+' .pill').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#stage-pills .pill').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#'+id+' .pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      selectedStage = btn.dataset.val;
     });
   });
+}
+document.getElementById('message-input').addEventListener('input', function() {
+  document.getElementById('char-count').textContent = this.value.length + ' / 800';
+});
 
-  document.querySelectorAll('#vibe-pills .pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#vibe-pills .pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedVibe = btn.dataset.val;
-    });
-  });
-
-  document.querySelectorAll('#tone-options .tone-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#tone-options .tone-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedTone = btn.dataset.val;
-    });
-  });
-
-  // CHAR COUNT
-  const msgInput = document.getElementById('message-input');
-  msgInput.addEventListener('input', () => {
-    document.getElementById('char-count').textContent = `${msgInput.value.length} / 800`;
-  });
-
-  // LABELS
-  const stageLabels = {
-    premier_contact: "premier contact",
-    quelques_echanges: "quelques échanges déjà échangés",
-    on_se_connait: "on se connaît un peu",
-    apres_rdv: "après un rendez-vous",
-    cold_restart: "relancer après un silence"
-  };
-
-  const vibeLabels = {
-    legere: "légère et fun",
-    flirty: "flirty avec du sous-texte",
-    intello: "intellectuelle et profonde",
-    froide: "distante ou froide",
-    inconnue: "indéterminée"
-  };
-
-  const toneLabels = {
-    confident: "confiant et posé",
-    mystere: "mystérieux et intrigant",
-    taquin: "taquin avec une pointe de défi",
-    direct: "direct et assumé",
-    doux: "doux et attentionné",
-    humour: "humoristique et léger"
-  };
-
-  // SEDUCTION KNOWLEDGE BASE — ROBERT GREENE + TY (TAEKWONDO)
-  const seductionKnowledge = `Tu es un maître de la séduction formé sur l'intégralité de l'œuvre de Robert Greene ET sur les enseignements pratiques de Ty (coach de DMs moderne). Tu appliques ces enseignements à la communication par messages (SMS, DM, réseaux sociaux).
-
-═══════════════════════════════════
-ROBERT GREENE — THE ART OF SEDUCTION
-═══════════════════════════════════
-
-▌ LES 9 TYPES DE SÉDUCTEURS
-
-1. L'IDÉAL RÊVÉ : Incarne le fantasme de l'autre. Chaque message doit éveiller une image, une émotion, un désir enfoui. Reflète à l'autre sa version idéalisée d'elle-même.
-2. LE LIBERTIN : Transgresse les codes sociaux avec charme. Crée un sentiment de complicité interdite.
-3. LE DANDY : Détaché, indépendant. L'ambiguïté fascine. Attire par son indifférence calculée.
-4. L'ACTEUR NATUREL : Spontané, joueur, sans filtre. L'humour et la légèreté désarment toutes les défenses.
-5. LE COQUIN : Provoque, taquine, défie. Crée de la tension sans vulgarité.
-6. LE CHARMEUR : Écoute vraiment, valorise, reflète. Fait sentir à l'autre qu'elle est unique.
-7. LE CARISMATIQUE : Sa certitude intérieure est contagieuse. La foi absolue en soi attire irrésistiblement.
-8. L'ÉTOILE : Persona mystérieuse et inaccessible. Présence rare mais marquante.
-9. LE SIRÈNE MASCULIN : Représente ce que l'autre désire secrètement.
-
-▌ LES 24 LOIS — APPLIQUÉES AUX MESSAGES
-
-• Approcher de biais, jamais de front. La confiance s'installe avant le désir.
-• Envoyer des signaux contradictoires : fort et vulnérable, sérieux et joueur. L'imprévisibilité crée la fascination.
-• Créer un manque : ne jamais combler le désir entièrement.
-• L'art de l'insinuation : suggérer, laisser entendre. Ce qui est dit entre les lignes est plus puissant.
-• Jamais laisser l'autre trop certaine de tes sentiments. Une petite dose d'incertitude maintient l'intérêt.
-• L'absence parle plus fort que la présence constante.
-• Refléter ses valeurs, ses goûts pour créer une résonance authentique.
-• Créer un univers partagé : références communes, intimité qui vous appartient à vous deux.
-• Ne jamais aller trop loin trop vite. Le désir se nourrit de patience.
-
-▌ 48 LAWS OF POWER — SÉDUCTION
-
-• Rareté crée la valeur. Plus tu es disponible, moins tu as de valeur.
-• L'imprévisibilité maintient le pouvoir et l'intérêt.
-• Agir avec audace. L'hésitation est plus dangereuse que la mauvaise décision.
-• Royauté naturelle : ne jamais sembler avoir besoin de validation.
-• Effet miroir : refléter l'autre crée une connexion profonde.
-
-═══════════════════════════════════
-TY — COACH DE DMs MODERNE (TAEKWONDO)
-═══════════════════════════════════
-
-▌ LES ERREURS FATALES À ÉVITER
-
-1. LE COMPLIMENT BANAL : "T'es belle", "t'es trop jolie" → conversation morte. Les compliments génériques sont des dead ends. La fille dit "merci" et n'a rien à répondre. JAMAIS ouvrir avec un compliment basique.
-
-2. BATTRE AUTOUR DU POT : Parler de tout sauf de ce qu'on veut. Piloter sur des sujets sans jamais tirer sa cartouche. C'est ce que Ty appelle le "dirty mac" — lâche et sans substance.
-
-3. LE DOUBLE TEXT INUTILE : Envoyer plusieurs messages sans réponse. Ça crie le désespoir.
-
-4. MENTIONNER D'AUTRES PERSONNES : Parler d'autres mecs ou filles dans la conv. Zéro valeur, zéro focus.
-
-5. LES QUESTIONS SANS SUBSTANCE : "T'as passé une bonne journée ?", "Wyd ?", "Quoi de neuf ?" → questions vides qui mènent nulle part.
-
-6. DEMANDER LA PERMISSION : "Can I get a hug", "teach me your ways", "qu'est-ce que tu penses de..." → posture de soumission totale.
-
-7. LES PAVÉS CRINGE : Écrire des romans émotionnels pour expliquer ce qu'on ressent. Répulsif.
-
-8. PARLER EN GÉNÉRAL : Dire des vérités générales ("c'est bien de sortir de sa zone de confort") au lieu de créer une connexion entre VOUS DEUX.
-
-▌ LES PRINCIPES GAGNANTS DE TY
-
-CRÉER DES OPPORTUNITÉS : Ne pas attendre des signaux. Créer l'opportunité pour qu'elle puisse être intéressée. Le train passe une fois. Si elle rate son arrêt, le train continue.
-
-LA CONVICTION : Parler avec une certitude absolue de ce qu'on dit. Comme un pasteur qui prêche — pas monotone, mais avec une foi totale. La conviction dans un texte se ressent même sans voir la voix.
-
-PARLER POUR VOUS DEUX : Au lieu de "c'est bien de sortir de sa zone de confort" dire "plus tu passes de temps avec moi, plus tu vas sortir de ta zone de confort". Toujours ramener à NOUS, pas en général.
-
-UNE PHRASE DIRECTE > 12 PARAGRAPHES : Une phrase qui crée une opportunité vaut mieux que dix écrans de conversation sans pivot. "Je veux apprendre à mieux te connaître" + numéro = plus efficace que 2 heures de conv banale.
-
-FAIRE DES DÉCLARATIONS, PAS DES QUESTIONS : Au lieu de "est-ce que tu veux qu'on se voit ?" → "t'as qu'à venir." Au lieu de "tu es jolie" → "j'aurais pas pu me coucher sans t'avoir parlé, quelqu'un comme toi ça se laisse pas passer."
-
-L'HUMOUR THREADÉ : Trouver l'angle malin dans ce qu'elle dit et rebondir dessus. Exemple de Ty : elle dit "je poste rarement sur Instagram" → lui répond "t'as pas besoin de poster, elles seraient mieux dans mon téléphone de toute façon."
-
-LA RÉCUPÉRATION : Le refus ou le "j'ai un copain" n'est pas définitif pour le mauvais mec. Avec la bonne conviction : "j'essaie pas fort, je suis juste un homme qui va chercher ce qu'il veut" → elle envoie son numéro.
-
-TU ES LE DÉNOMINATEUR COMMUN : Ton jeu faible en texte = ton jeu faible en vrai. Arrêter de dire "je suis nul en textos". Tu es nul en game, point. Le texte révèle qui tu es vraiment.
-
-CHAQUE FEMME EST UN DÉMON POUR L'HOMME QU'ELLE AIME : Une femme peut être parfaitement réservée en public et se lâcher totalement avec l'homme en qui elle a confiance. Ton rôle : être cet homme. Créer la confiance, la sécurité, la liberté.
-
-▌ STYLE DE MESSAGE PARFAIT (TY + GREENE)
-
-✓ Courts — 1 à 3 phrases maximum par message
-✓ Une seule question max par message — et pas une question vide
-✓ Finir sur une affirmation, pas une question — force l'autre à rebondir
-✓ Créer des opportunités concrètes (rdv, échange de numéro, FaceTime)
-✓ Utiliser des références à ce qu'elle a dit — montre que tu écoutes vraiment
-✓ Injecter de l'humour dans la situation présente, pas générique
-✓ Parler toujours en terme de NOUS, pas en général
-
-✗ Jamais "haha", "lol", "mdr" à tout va
-✗ Jamais deux messages sans réponse
-✗ Jamais de compliment comme ouverture
-✗ Jamais mentionner d'autres personnes
-✗ Jamais justifier, sur-expliquer, mendier de l'attention
-✗ Jamais "wyd", "t'as passé une bonne journée ?"`;
-
-  // FIRST MESSAGE KNOWLEDGE BASE
-  const firstMsgKnowledge = `Tu es un expert en premier contact par DM, formé sur Robert Greene (Art of Seduction) et Ty (coach de DMs moderne). Ta mission : créer le PREMIER message parfait pour contacter une femme pour la toute première fois sur les réseaux sociaux.
-
-RÈGLES ABSOLUES DU PREMIER MESSAGE :
-
-1. PAS DE COMPLIMENT BANAL EN OUVERTURE : "T'es belle", "t'es jolie" = conversation morte immédiatement. C'est ce que tous les mecs envoient. Sois différent.
-
-2. CRÉER UNE OPPORTUNITÉ, PAS UNE DEMANDE : Ne pas demander si elle veut parler. Créer une ouverture qui l'invite naturellement à répondre.
-
-3. UTILISER CE QU'ON SAIT D'ELLE : Sa bio, ses posts, ses intérêts. Un message personnalisé montre que tu l'as vraiment regardée, pas juste copiée-collée.
-
-4. L'INSINUATION > LA DÉCLARATION DIRECTE : Ne pas dire "je te trouve belle je veux te connaître". Dire quelque chose qui montre l'intérêt SANS le crier.
-
-5. CRÉER DE LA CURIOSITÉ : Le message idéal lui donne envie de répondre pour en savoir plus. Elle doit se demander qui tu es.
-
-6. COURT ET PERCUTANT : Maximum 2-3 phrases. Jamais un paragraphe pour un premier DM.
-
-7. UNE SEULE QUESTION MAX : Ou finir sur une affirmation qui l'invite à réagir.
-
-8. L'HUMOUR THREADÉ : Rebondir sur quelque chose de spécifique dans son profil avec un angle malin et inattendu.
-
-9. MONTRER QU'ON A DE LA VALEUR : Pas en la listant, mais en parlant avec la confiance de quelqu'un qui n'a pas besoin de l'approbation de personne.
-
-10. OBJECTIF CLAIR : Chaque premier message doit soit créer une conversation, soit mener vers un échange de contacts, soit intriguer assez pour qu'elle vienne vers toi.
-
-EXEMPLES DE BONS PREMIERS MESSAGES (style) :
-- Observation originale sur quelque chose dans son profil + question ouverte ou affirmation intrigante
-- Taquinerie bienveillante sur quelque chose qu'elle a posté + ouverture
-- Référence à quelque chose de spécifique dans sa bio avec une tournure inattendue
-- Déclaration d'intérêt avec conviction, non comme une demande mais comme une évidence : "j'aurais pas pu passer à côté sans dire quelque chose, quelqu'un comme toi ça se laisse pas filer"
-
-ADAPTER SELON LA PLATEFORME :
-- Instagram : répondre à une story est le meilleur angle. DM froid = plus risqué mais possible avec le bon message.
-- TikTok : référencer une vidéo spécifique qu'elle a postée montre de l'attention réelle.
-- Snapchat : plus décontracté, humour et légèreté encore plus importants.
-- SMS / IRL : plus direct possible, aller droit au but.`;
-
-  async function generateFirstMessage() {
-    if (!checkAccessBeforeGenerate()) return;
-
-    const platform = document.querySelector('#platform-pills .pill.active')?.dataset.val || 'instagram';
-    const bio = document.getElementById('profile-bio').value.trim();
-    const goal = document.querySelector('#goal-pills .pill.active')?.dataset.val || 'engager';
-    const tone = document.querySelector('#first-tone-pills .pill.active')?.dataset.val || 'confident';
-
-    if (!bio) {
-      const errEl = document.getElementById('first-error-msg');
-      errEl.textContent = 'Décris son profil pour que je puisse créer un message personnalisé 👆';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    document.getElementById('first-error-msg').style.display = 'none';
-    setFirstLoading(true);
-
-    const platformLabels = { instagram: 'Instagram', tiktok: 'TikTok', snapchat: 'Snapchat', twitter: 'Twitter/X', sms: 'SMS', irl: 'IRL puis DM' };
-    const goalLabels = { engager: 'lancer la conversation', numero: 'obtenir son numéro', rdv: 'proposer un rdv direct', intrigue: "l'intriguer sans but précis" };
-    const toneLabels2 = { confident: 'confiant et posé', taquin: 'taquin avec défi', mystere: 'mystérieux', humour: 'humoristique', direct: 'direct et assumé' };
-
-    const prompt = `${firstMsgKnowledge}
-
----
-
-PROFIL DE LA FILLE :
-- Infos sur elle (bio, posts, centres d'intérêt) : ${bio}
-
-CONTEXTE :
-- Plateforme : ${platformLabels[platform]}
-- Objectif : ${goalLabels[goal]}
-- Style souhaité : ${toneLabels2[tone]}
-- C'est le TOUT PREMIER message, il n'y a aucun historique de conversation
-
----
-
-Ta mission : générer exactement 3 premiers messages différents, chacun avec une approche distincte.
-
-Réponds UNIQUEMENT en JSON valide, sans texte avant ou après :
-{
-  "responses": [
-    {
-      "tag": "Nom de la stratégie (2-3 mots)",
-      "text": "Le message exact à envoyer",
-      "why": "Pourquoi cette approche fonctionne (1 phrase)"
-    },
-    { "tag": "...", "text": "...", "why": "..." },
-    { "tag": "...", "text": "...", "why": "..." }
-  ]
+function switchMode(mode) {
+  document.getElementById('reply-panel').classList.toggle('hidden', mode !== 'reply');
+  document.getElementById('first-msg-panel').classList.toggle('active', mode === 'first');
+  document.getElementById('tab-reply').classList.toggle('active', mode === 'reply');
+  document.getElementById('tab-first').classList.toggle('active', mode === 'first');
+  if (mode === 'reply') {
+    document.getElementById('hero-eyebrow').textContent = "✦ L'art de la réponse parfaite";
+    document.getElementById('hero-title').innerHTML = 'Réponds aux messages<br>comme un <em>expert</em>';
+    document.getElementById('hero-desc').textContent = 'Colle le message reçu, donne le contexte. Les réponses sont basées sur Robert Greene et les meilleurs coachs.';
+  } else {
+    document.getElementById('hero-eyebrow').textContent = '✦ Le premier contact parfait';
+    document.getElementById('hero-title').innerHTML = 'Lance la conversation<br>comme un <em>pro</em>';
+    document.getElementById('hero-desc').textContent = "Décris son profil — génère le premier message parfait pour l'approcher sur n'importe quel réseau.";
+  }
 }
 
-Les messages doivent sonner naturels, pas robotiques. Adapter le registre à la plateforme.`;
+// KNOWLEDGE BASE — TON DUR, PAS LÈCHE-CUL
+const seductionKnowledge = `Tu es un coach de séduction qui dit les vraies choses sans filtre. Tu connais Robert Greene (Art of Seduction, 48 Laws of Power) et Ty sur le bout des doigts. Tu génères des réponses pour des hommes qui ont de la valeur et qui le savent.
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
-      });
+MENTALITÉ DE BASE :
+Tu n'es pas là pour plaire à tout prix. Tu as une vie, des standards, et tu n'attends pas après une fille. Les réponses que tu génères reflètent ça. Un homme qui a de la valeur ne cours pas, il attire.
 
-      const data = await response.json();
-      if (!response.ok) throw new Error("API " + response.status + ": " + (data.error?.message || JSON.stringify(data)));
+ROBERT GREENE — PRINCIPES CLÉS :
+- Rareté = valeur. Toujours disponible = aucune valeur.
+- L'imprévisibilité maintient l'intérêt. Sois toujours un peu insaisissable.
+- Suggère, insinue. Ce qui est sous-entendu est 10x plus puissant que ce qui est dit clairement.
+- Crée un manque. Ne comble jamais le désir entièrement — laisse-la en vouloir plus.
+- L'absence est une arme. Silence stratégique > réponse immédiate.
+- Royauté naturelle : tu n'as besoin de la validation de personne.
+- Parle toujours de VOUS DEUX, pas en général. "Toi et moi" > généralités vides.
 
-      const rawText = data.content.map(i => i.text || "").join("");
-      const clean = rawText.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(clean);
+TY — RÈGLES DU JEU EN DM :
+ERREURS QUI TUENT L'ATTRACTION :
+- "T'es belle / jolie / mignonne" en ouverture = mort immédiate. Elle entend ça 50x par jour.
+- Double text sans réponse = désespoir visible.
+- Pavés émotionnels = red flag immédiat.
+- Questions sans substance : "wyd", "ça va", "t'as passé une bonne journée" = guy ordinaire.
+- Demander la permission : "est-ce que je peux..." = posture de soumission.
+- Parler d'autres mecs ou filles = focus raté.
 
-      incrementUse();
-      renderFirstResponses(parsed.responses);
+CE QUI ATTIRE VRAIMENT :
+- CONVICTION : Parle comme si tu étais sûr à 100% de ce que tu dis. Pas d'hésitation.
+- DÉCLARATIONS > QUESTIONS : "T'as qu'à venir" au lieu de "tu veux qu'on se voit ?"
+- HUMOUR THREADÉ : Rebondir sur ce qu'elle dit avec un angle inattendu et malin.
+- UNE PHRASE QUI CRÉE UNE OPPORTUNITÉ > 10 messages banals.
+- PARLER POUR VOUS DEUX : "Plus tu passes de temps avec moi..." pas "en général c'est bien de..."
+- REFUS = PAS DÉFINITIF si tu as la bonne conviction. "J'ai un copain" n'est pas une porte fermée pour un homme qui sait ce qu'il veut.
 
-    } catch(err) {
-      const errEl = document.getElementById('first-error-msg');
-      errEl.textContent = "Erreur: " + err.message;
-      errEl.style.display = 'block';
-    } finally {
-      setFirstLoading(false);
-    }
-  }
+STYLE DES RÉPONSES :
+- 1 à 3 phrases max. Court = confiant.
+- Une question max, ou finir sur une affirmation forte.
+- Jamais "haha", "lol", "mdr" à tout va.
+- Références à ce qu'elle a dit — montre que tu écoutes sans être servile.
+- Sous-entendus > déclarations directes.
+- Ton : homme qui sait ce qu'il vaut, pas un mec qui essaie de plaire.`;
 
-  function renderFirstResponses(responses) {
-    const grid = document.getElementById('first-responses-grid');
-    const section = document.getElementById('first-result-section');
-    grid.innerHTML = '';
-    responses.forEach(r => {
-      const card = document.createElement('div');
-      card.className = 'response-card';
-      card.innerHTML = `
-        <div class="response-tag">${r.tag}</div>
-        <div class="response-text">${r.text}</div>
-        <div class="response-why">💡 ${r.why}</div>
-        <div class="copy-indicator">Copier</div>
-      `;
-      card.addEventListener('click', () => {
-        navigator.clipboard?.writeText(r.text);
-        document.querySelectorAll('#first-responses-grid .response-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        card.querySelector('.copy-indicator').textContent = '✓ Copié !';
-        setTimeout(() => { card.querySelector('.copy-indicator').textContent = 'Copier'; }, 2000);
-      });
-      grid.appendChild(card);
-    });
-    section.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+const firstMsgKnowledge = `Tu es un coach de séduction. Tu génères des PREMIERS messages pour des hommes confiants qui savent ce qu'ils veulent — sans être agressifs, sans être serviles. Le ton est naturel, direct, charmant.
 
-  function setFirstLoading(loading) {
-    const btn = document.getElementById('generate-first-btn');
-    const txt = document.getElementById('first-btn-text');
-    const dots = document.getElementById('first-loading');
-    btn.disabled = loading;
-    txt.style.display = loading ? 'none' : 'block';
-    dots.style.display = loading ? 'flex' : 'none';
-  }
+RÈGLES ABSOLUES — PREMIER MESSAGE :
+1. PAS DE COMPLIMENT GÉNÉRIQUE. "T'es belle" = mort immédiate. Sois original, utilise ce qu'on sait d'elle.
+2. PAS DE DEMANDE. Tu crées une ouverture naturelle, pas une requête.
+3. PERSONNALISÉ. Un message qui aurait pu être envoyé à n'importe qui vaut rien.
+4. CRÉE DE LA CURIOSITÉ. Elle doit avoir envie de répondre pour en savoir plus.
+5. SOUS-ENTENDUS > DÉCLARATIONS. Montre l'intérêt sans le crier.
+6. HUMOUR OU ANGLE INATTENDU sur quelque chose dans son profil.
+7. CONVICTION. Pas d'hésitation, pas de "peut-être", mais sans arrogance.
+8. CHALEUREUX mais pas servile. Naturel, pas calculé.
 
-  function switchMode(mode) {
-    const replyPanel = document.getElementById('reply-panel');
-    const firstPanel = document.getElementById('first-msg-panel');
-    const tabReply = document.getElementById('tab-reply');
-    const tabFirst = document.getElementById('tab-first');
-    const heroEyebrow = document.getElementById('hero-eyebrow');
-    const heroTitle = document.getElementById('hero-title');
-    const heroDesc = document.getElementById('hero-desc');
+RÈGLE D'OR : UNE SEULE PHRASE MAX. Courte, percutante, mémorable. ZÉRO VIRGULE. On parle comme un vrai, pas comme un essai scolaire. Phrases simples, directes, sans ponctuation complexe.
 
-    if (mode === 'reply') {
-      replyPanel.classList.remove('hidden');
-      firstPanel.classList.remove('active');
-      tabReply.classList.add('active');
-      tabFirst.classList.remove('active');
-      heroEyebrow.textContent = '✦ L\'art de la réponse parfaite';
-      heroTitle.innerHTML = 'Réponds aux messages<br>comme un <em>expert</em>';
-      heroDesc.textContent = 'Colle le message que tu as reçu, donne le contexte — BCOME3LITE RIZZ génère les meilleures réponses basées sur les principes de séduction qui fonctionnent vraiment.';
-    } else {
-      replyPanel.classList.add('hidden');
-      firstPanel.classList.add('active');
-      tabReply.classList.remove('active');
-      tabFirst.classList.add('active');
-      heroEyebrow.textContent = '✦ Le premier contact parfait';
-      heroTitle.innerHTML = 'Lance la conversation<br>comme un <em>pro</em>';
-      heroDesc.textContent = 'Décris son profil — BCOME3LITE RIZZ génère le premier message parfait pour l\'approcher sur n\'importe quel réseau.';
-    }
-  }
+SELON LA PLATEFORME :
+- Instagram/TikTok : référencer quelque chose de spécifique dans son profil. Répondre à une story = angle le plus naturel.
+- Snapchat : plus décontracté, humour encore plus important.
+- SMS/IRL : aller droit au but, pas de warm-up.`;
 
-  // Show mode switcher after login
-  const origShowUserBar = showUserBar;
-  function showUserBar(user) {
-    origShowUserBar(user);
-    document.getElementById('mode-switcher').style.display = 'block';
-  }
+async function generateResponse() {
+  const message = document.getElementById('message-input').value.trim();
+  if (!message) { showError('error-msg', 'Colle le message reçu d\'abord'); return; }
 
-  // Platform pills
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#platform-pills .pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#platform-pills .pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-    document.querySelectorAll('#goal-pills .pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#goal-pills .pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-    document.querySelectorAll('#first-tone-pills .pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#first-tone-pills .pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-  });
+  const stage = document.querySelector('#stage-pills .pill.active')?.dataset.val || 'premier_contact';
+  const vibe = document.querySelector('#vibe-pills .pill.active')?.dataset.val || 'legere';
+  const tone = document.querySelector('#tone-options .tone-btn.active')?.dataset.val || 'confident';
 
-    async function generateResponse() {
-    const message = msgInput.value.trim();
+  const stageL = {premier_contact:'premier contact',quelques_echanges:'quelques échanges',on_se_connait:'on se connaît bien',apres_rdv:'après un rdv',cold_restart:'relance après silence'};
+  const vibeL = {legere:'légère',flirty:'flirty',intello:'intellectuelle',froide:'distante ou froide',inconnue:'indéterminée'};
+  const toneL = {confident:'confiant et posé',mystere:'mystérieux',taquin:'taquin',direct:'direct et assumé',doux:'doux',humour:'humoristique'};
 
-    if (!message) {
-      showError("Colle d'abord le message qu'elle t'a envoyé 👆");
-      return;
-    }
+  hideError('error-msg');
+  setLoading('generate-btn','btn-text','loading',true);
 
-    if (message.length < 3) {
-      showError("Le message est trop court pour être analysé.");
-      return;
-    }
-
-    if (!checkAccessBeforeGenerate()) return;
-    hideError();
-    setLoading(true);
-
-    const prompt = `${seductionKnowledge}
-
----
+  const prompt = `${seductionKnowledge}
 
 SITUATION :
-- Stade de la relation : ${stageLabels[selectedStage]}
-- Vibe de la conversation : ${vibeLabels[selectedVibe]}
-- Style de réponse souhaité : ${toneLabels[selectedTone]}
+- Stade : ${stageL[stage]}
+- Vibe : ${vibeL[vibe]}
+- Style : ${toneL[tone]}
+- MESSAGE RECU : "${message}"
 
-MESSAGE REÇU :
-"${message}"
+Génère 3 réponses distinctes. Chacune doit sonner naturelle, pas robotique. JSON uniquement :
+{"responses":[{"tag":"nom strategie 2-3 mots","text":"réponse exacte","why":"pourquoi ça marche en 1 phrase"},{"tag":"...","text":"...","why":"..."},{"tag":"...","text":"...","why":"..."}]}`;
 
----
-
-Ta mission : générer exactement 3 réponses optimales à ce message.
-
-Pour chaque réponse, applique les principes de séduction adaptés à la situation.
-
-Réponds UNIQUEMENT en JSON valide, sans aucun texte avant ou après, dans ce format exact :
-{
-  "responses": [
-    {
-      "tag": "Nom court de la stratégie (2-3 mots max)",
-      "text": "La réponse exacte à envoyer",
-      "why": "Explication courte (1 phrase) de pourquoi cette réponse fonctionne"
-    },
-    {
-      "tag": "...",
-      "text": "...",
-      "why": "..."
-    },
-    {
-      "tag": "...",
-      "text": "...",
-      "why": "..."
-    }
-  ]
+  await callAPI(prompt,'responses-grid','result-section','error-msg','generate-btn','btn-text','loading');
 }
 
-Les 3 réponses doivent être distinctes (différentes stratégies, pas juste reformulées). Elles doivent sonner naturelles, pas comme un robot. Adapter le registre de langue au contexte.`;
+async function generateFirstMessage() {
+  const bio = document.getElementById('profile-bio').value.trim();
+  if (!bio) { showError('first-error-msg', 'Décris son profil d\'abord'); return; }
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          max_tokens: 1000,
-          messages: [{ role: "user", content: prompt }]
-        })
-      });
+  const platform = document.querySelector('#platform-pills .pill.active')?.dataset.val || 'instagram';
+  const goal = document.querySelector('#goal-pills .pill.active')?.dataset.val || 'engager';
+  const tone = document.querySelector('#first-tone-pills .pill.active')?.dataset.val || 'confident';
 
-      const data = await response.json();
+  const platL = {instagram:'Instagram',tiktok:'TikTok',snapchat:'Snapchat',twitter:'Twitter/X',sms:'SMS',irl:'IRL puis DM'};
+  const goalL = {engager:'lancer la conv',numero:'obtenir son numéro',rdv:'proposer un rdv direct',intrigue:"l'intriguer"};
+  const toneL = {confident:'confiant',taquin:'taquin',mystere:'mystérieux',humour:'humoristique',direct:'direct et assumé'};
 
-      if (!response.ok) {
-        throw new Error("API " + response.status + ": " + (data.error?.message || JSON.stringify(data)));
-      }
+  hideError('first-error-msg');
+  setLoading('generate-first-btn','first-btn-text','first-loading',true);
 
-      const rawText = data.content.map(i => i.text || "").join("");
-      const clean = rawText.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(clean);
+  const prompt = `${firstMsgKnowledge}
 
-      incrementUse();
-      renderResponses(parsed.responses);
+PROFIL :
+- Infos sur elle : ${bio}
+CONTEXTE :
+- Plateforme : ${platL[platform]}
+- Objectif : ${goalL[goal]}
+- Style : ${toneL[tone]}
+- C'est le TOUT PREMIER message. Aucun historique.
 
-    } catch (err) {
-      console.error(err);
-      showError("Erreur: " + err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+Génère 3 premiers messages distincts. CHAQUE MESSAGE = UNE SEULE PHRASE SANS VIRGULE. Simple, direct, naturel. Comme un vrai texte entre humains. JSON uniquement :
+{"responses":[{"tag":"nom strategie","text":"message exact","why":"pourquoi ça marche"},{"tag":"...","text":"...","why":"..."},{"tag":"...","text":"...","why":"..."}]}`;
 
-  function renderResponses(responses) {
-    const grid = document.getElementById('responses-grid');
-    const section = document.getElementById('result-section');
-    const tips = document.getElementById('tips-section');
+  await callAPI(prompt,'first-responses-grid','first-result-section','first-error-msg','generate-first-btn','first-btn-text','first-loading');
+}
 
-    grid.innerHTML = '';
-
-    responses.forEach((r, i) => {
-      const card = document.createElement('div');
-      card.className = 'response-card';
-      card.innerHTML = `
-        <div class="response-tag">${r.tag}</div>
-        <div class="response-text">${r.text}</div>
-        <div class="response-why">💡 ${r.why}</div>
-        <div class="copy-indicator">Copier</div>
-      `;
-      card.addEventListener('click', () => {
-        navigator.clipboard?.writeText(r.text);
-        document.querySelectorAll('.response-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        card.querySelector('.copy-indicator').textContent = '✓ Copié !';
-        setTimeout(() => {
-          card.querySelector('.copy-indicator').textContent = 'Copier';
-        }, 2000);
-      });
-      grid.appendChild(card);
+async function callAPI(prompt, gridId, sectionId, errorId, btnId, textId, loadingId) {
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
     });
-
-    section.style.display = 'block';
-    tips.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const data = await response.json();
+    if (!response.ok) throw new Error("API "+response.status+": "+(data.error?.message||JSON.stringify(data)));
+    const raw = data.content.map(i=>i.text||"").join("");
+    const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
+    renderResponses(parsed.responses, gridId, sectionId);
+  } catch(err) {
+    showError(errorId, "Erreur: "+err.message);
+  } finally {
+    setLoading(btnId, textId, loadingId, false);
   }
+}
 
-  function setLoading(loading) {
-    const btn = document.getElementById('generate-btn');
-    const txt = document.getElementById('btn-text');
-    const dots = document.getElementById('loading');
-
-    btn.disabled = loading;
-    if (loading) {
-      txt.style.display = 'none';
-      dots.style.display = 'flex';
-    } else {
-      txt.style.display = 'block';
-      dots.style.display = 'none';
-    }
-  }
-
-
-
-  // ═══════════════════════════════════
-  // AUTH & PAYWALL SYSTEM
-  // ═══════════════════════════════════
-
-  const MAX_FREE_USES = 3;
-
-  function getUser() {
-    try {
-      const raw = localStorage.getItem('b3_user');
-      return raw ? JSON.parse(raw) : null;
-    } catch(e) { return null; }
-  }
-
-  function saveUser(data) {
-    localStorage.setItem('b3_user', JSON.stringify(data));
-  }
-
-  function initApp() {
-    const user = getUser();
-    if (!user) {
-      document.getElementById('auth-overlay').classList.remove('hidden');
-      return;
-    }
-    document.getElementById('auth-overlay').classList.add('hidden');
-    showUserBar(user);
-    updateTrialBar(user);
-  }
-
-  function showUserBar(user) {
-    document.getElementById('user-info-bar').style.display = 'block';
-    document.getElementById('user-email-display').textContent = '✦ ' + user.email;
-    if (!user.premium) {
-      document.getElementById('trial-bar').style.display = 'block';
-    }
-  }
-
-  function updateTrialBar(user) {
-    if (user.premium) {
-      document.getElementById('trial-bar').style.display = 'none';
-      return;
-    }
-    const used = user.uses || 0;
-    const remaining = Math.max(0, MAX_FREE_USES - used);
-    document.getElementById('trial-text').textContent =
-      remaining > 0
-        ? `${remaining} essai${remaining > 1 ? 's' : ''} gratuit${remaining > 1 ? 's' : ''} restant${remaining > 1 ? 's' : ''}`
-        : 'Essais épuisés — passe à Premium';
-
-    for (let i = 1; i <= 3; i++) {
-      const dot = document.getElementById('dot-' + i);
-      if (i <= used) dot.classList.add('used');
-      else dot.classList.remove('used');
-    }
-  }
-
-  function handleAuth() {
-    const emailInput = document.getElementById('auth-email');
-    const email = emailInput.value.trim();
-    const errorEl = document.getElementById('auth-error');
-
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      errorEl.textContent = 'Entre un email valide pour continuer.';
-      errorEl.style.display = 'block';
-      return;
-    }
-
-    errorEl.style.display = 'none';
-
-    // Check if user already exists in storage
-    let user = getUser();
-    if (!user || user.email !== email) {
-      user = { email: email, uses: 0, premium: false, registeredAt: Date.now() };
-    }
-    saveUser(user);
-    document.getElementById('auth-overlay').classList.add('hidden');
-    showUserBar(user);
-    updateTrialBar(user);
-  }
-
-  function handleLogout() {
-    localStorage.removeItem('b3_user');
-    location.reload();
-  }
-
-  function showPaywall() {
-    document.getElementById('paywall-overlay').classList.remove('hidden');
-  }
-
-  function closePaywall() {
-    document.getElementById('paywall-overlay').classList.add('hidden');
-  }
-
-  function handleUpgrade() {
-    window.location.href = 'https://buy.stripe.com/bJe3cvd5K8R39xR3XE5Ne00';
-  }
-
-  // Handle return from Stripe success
-  function checkStripeReturn() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('premium') === 'true') {
-      const user = getUser();
-      if (user) {
-        user.premium = true;
-        saveUser(user);
-        // Clean URL
-        window.history.replaceState({}, '', window.location.pathname);
-        closePaywall();
-        updateTrialBar(user);
-        showUserBar(user);
-        // Show success message
-        setTimeout(() => {
-          const bar = document.getElementById('trial-bar');
-          if (bar) bar.style.display = 'none';
-          alert('🎉 Bienvenue en Premium ! Tu as maintenant un accès illimité à BCOME3LITE RIZZ.');
-        }, 500);
-      }
-    }
-  }
-
-  function checkAccessBeforeGenerate() {
-    const user = getUser();
-    if (!user) { initApp(); return false; }
-    if (user.premium) return true;
-    if ((user.uses || 0) >= MAX_FREE_USES) {
-      showPaywall();
-      return false;
-    }
-    return true;
-  }
-
-  function incrementUse() {
-    const user = getUser();
-    if (user && !user.premium) {
-      user.uses = (user.uses || 0) + 1;
-      saveUser(user);
-      updateTrialBar(user);
-    }
-  }
-
-  // Initialize on load
-  window.addEventListener('DOMContentLoaded', () => { initApp(); checkStripeReturn(); });
-
-  // Allow Enter key in email input
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && document.activeElement.id === 'auth-email') handleAuth();
+function renderResponses(responses, gridId, sectionId) {
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  responses.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'response-card';
+    card.innerHTML = `<div class="response-tag">${r.tag}</div><div class="response-text">${r.text}</div><div class="response-why">💡 ${r.why}</div><div class="copy-indicator">Copier</div>`;
+    card.addEventListener('click', () => {
+      navigator.clipboard?.writeText(r.text);
+      document.querySelectorAll('#'+gridId+' .response-card').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      card.querySelector('.copy-indicator').textContent='✓ Copié !';
+      setTimeout(()=>{card.querySelector('.copy-indicator').textContent='Copier';},2000);
+    });
+    grid.appendChild(card);
   });
+  document.getElementById(sectionId).style.display='block';
+  document.getElementById(sectionId).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
 
-
-  function showError(msg) {
-    const el = document.getElementById('error-msg');
-    el.textContent = msg;
-    el.style.display = 'block';
-  }
-
-  function hideError() {
-    document.getElementById('error-msg').style.display = 'none';
-  }
+function setLoading(btnId,textId,loadingId,loading) {
+  document.getElementById(btnId).disabled=loading;
+  document.getElementById(textId).style.display=loading?'none':'block';
+  document.getElementById(loadingId).style.display=loading?'flex':'none';
+}
+function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
+function hideError(id){document.getElementById(id).style.display='none';}
 </script>
 </body>
 </html>
